@@ -36,7 +36,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#details">Details</a></li>
         <li><a href="#demo">Demo</a></li>
-        <li><a href="#citations">Contact</a></li>
+        <li><a href="#citations">Citations</a></li>
       </ul>                 
     </header>
    
@@ -87,19 +87,58 @@
             </p>
             <h3>OpenGL</h3>
             <p>
-              <a href="https://www.opengl.org/">OpenGL</a> 
+              <a href="https://www.opengl.org/">OpenGL</a> is used in the project as the primary graphics rendering tool. It is used to
+              control the window, but more importantly I use dynamic buffers that update as the objects move around in the scene to store and display
+              position data of the meshes. It uses the faces file organize the buffer then I simply draw GL_TRIANGLES. 
             </p>
             <h3>Extended Postion Based Dynamics (XPBD)</h3>
             <p>
-
+              My main point of guidance through the project was the excellent papers and videos by <a href="https://matthias-research.github.io/pages/index.html">Matthias Müller</a>
+              His projects in his 10 minute physics series, "XPBD" and "Simple and Unbreakable Simulation of Soft Bodies" were the original inspirations to persue
+              this project in the first place. 
+              <br>
+              The basic algorith for the XPBD method is broken into a few steps. While simulating, you take the change in time between update frames. For each particle
+              update the previous particle position, update velecity by the current force of gravity exerted on it, then update the current position based on that velocity.
+              The next step is the constraint step. In this step, iterate over every constraint, in this case it is every edge and tetrahedron. Caculate the lagrange multiplier
+              based on the constraint formula over the sum of the inverse masses and gradients of each constraint acting on a particle x. Then update the particle's posision by
+              a factor of the system mass, lagrange multiplier, and constraint gradients. The next step is to detect collisions and adjust those accordingly. Lastly update the velocities of 
+              the particles based on the change in the position since the first step over the time step. (<a href= "https://mmacklin.com/neohookean.pdf">Matthias Müller's paper for reference</a>)
             </p>
           </div>
           
           <div id="demo" class="content-region hide">
             <h2>Demo</h2>
+            <h3>Compliance</h3>
             <p>
-              Pellentesque nec nam aliquam sem et tortor consequat. Quisque sagittis purus sit amet volutpat consequat. Magna eget est lorem ipsum dolor. 
+              The following series of videos deomonstrate the change in compliance and the effect on the mesh. The more compliant (opposite of stiff) of the 2
+              demos show the shape collapsing and springing back up as volume constraints kick in. The other video shows a stiffer model that comes to a rest on the plane. 
             </p>
+            <video width="640" height="480" controls>
+              <source src="resources/RYAN PARMER 2023-12-12 05-36-44.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <video width="640" height="480" controls>
+              <source src="resources/RYAN PARMER 2023-12-12 06-21-32.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <h3>Squash and Stretch</h3>
+            <p>
+              The next 2 videos here show a sphere shape being squeezed in an invisible box and being pulled apart by 2 pins. The important thing to note is that when the sphere
+              is squashed and stretched out, the volume remains consistent in the shape as a whole, even if this part is a little glitchy and the 
+              sphere gains some angular momentum when being pushed to the limits. The bug has to do with the layout of the tetrahedrons and the stiffness
+              of the spheres used in this simulation. As soon as the sphere spins a little bit, the effect continues and it speeds up without stop. Given
+              more time on the project it it first on my list of fixes to the simulator along with greater customization of factors and control values
+              in the simulator. 
+            </p>
+            <video width="640" height="480" controls>
+              <source src="resources/RYAN PARMER 2023-12-12 06-15-33.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <video width="640" height="480" controls>
+              <source src="resources/RYAN PARMER 2023-12-12 06-40-49.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div id="citations" class="content-region hide">
@@ -108,7 +147,7 @@
               <li><a href="https://www.opengl.org/">OpenGL</a></li>
               <li><a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a></li>
               <li><a href="https://wias-berlin.de/software/index.jsp?id=TetGen">TetGen</a></li>
-              <li></li>
+              <li><a href= "https://mmacklin.com/neohookean.pdf">A Constraint-based Formulation of Stable Neo-Hookean Materials</a> by Matthias Müller and Miles Macklin</li>
             </ul>  
           </div>
           
@@ -117,7 +156,7 @@
     </div>
 
     <footer>  
-      <a href="https://www.linkedin.com/in/ryan-parmer/">Ryan Parmer</a>, Fall 2023
+      <a href="https://www.linkedin.com/in/ryan-parmer/">Ryan Parmer</a> Fall 2023
     </footer>
     
     <!-- Load additional JS scripts here -->
