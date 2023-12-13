@@ -59,8 +59,8 @@
             <p>
               Further details can be found in <a href="#details">Details</a> regarding the steps at large. Below you can find a video quickly going over the project. 
             </p>
-            <video width="720" height="680" controls>
-              <source src="resources/ryan_parmer.mkv" type="video/mkv">
+            <video width="720" height="405" controls>
+              <source src="resources/ryan_parmer.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
@@ -68,7 +68,30 @@
           <div id="details" class="content-region hide">
             <h2>Details</h2>
             <p>
-              Sed tempus urna et pharetra pharetra massa massa ultricies. Porttitor rhoncus dolor purus non enim praesent. Id aliquet risus feugiat in ante metus dictum. 
+              This sections contains most of the details about the project.
+            </p>
+            <h3>Overview</h3>
+            <p>
+              The project as a whole was completed in C++ using the <a href="https://www.opengl.org/">OpenGL</a> library as the framework for the graphics code. 
+              I also made use of the <a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a> library to store matrix info, vectors, and most of the vector math in the algorithm. 
+              The basic framework for the project came from a simple position based dynamics cloth simulator that made use of springs as "edge" constraints to hold together a system of particles.
+            </p>
+            <h3>TetGen</h3>
+            <p>
+              <a href="https://wias-berlin.de/software/index.jsp?id=TetGen">TetGen</a> is a open source software that allows its users to conver STL and other mesh files into  tetrahedralized meshes.
+              The way it does this is by splitting down into 4 separate files (really 3, the 4th is toggleable, but important for my use case). I split basic poly files into: node, edge, ele, and face files. 
+              Each file's first line contains the number of lines, each line starts with an index, and everything revolves around the node file. The node file contains vertex data, but more importantly, it fills
+              in points within the mesh models. The file will directly be translated into particle data in the simulator. The edge and ele files contain the 2 main constraints used in this project, egdes (of course) and 
+              tetrahedrons. The file format is the same, but instead of position data, it is arranged like an element buffer and just has number of indicies from the node file for however many particles are in the system (2 and 4). 
+              Like the nodes, the tetrahedral mesh contains internal edges and tetrahedrons. The face file is structed the same way, but contains data for surface triangles of the mesh arranged in counter clockwise orientation. This will be important in the next section.
+            </p>
+            <h3>OpenGL</h3>
+            <p>
+              <a href="https://www.opengl.org/">OpenGL</a> 
+            </p>
+            <h3>Extended Postion Based Dynamics (XPBD)</h3>
+            <p>
+
             </p>
           </div>
           
@@ -81,9 +104,12 @@
 
           <div id="citations" class="content-region hide">
             <h2>Citations</h2>
-            <p>
-              Pellentesque nec nam aliquam sem et tortor consequat. Quisque sagittis purus sit amet volutpat consequat. Magna eget est lorem ipsum dolor. 
-            </p>
+            <ul>
+              <li><a href="https://www.opengl.org/">OpenGL</a></li>
+              <li><a href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a></li>
+              <li><a href="https://wias-berlin.de/software/index.jsp?id=TetGen">TetGen</a></li>
+              <li></li>
+            </ul>  
           </div>
           
         </div>
@@ -91,7 +117,7 @@
     </div>
 
     <footer>  
-      Footer region
+      <a href="https://www.linkedin.com/in/ryan-parmer/">Ryan Parmer</a>, Fall 2023
     </footer>
     
     <!-- Load additional JS scripts here -->
